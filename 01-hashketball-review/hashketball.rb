@@ -109,6 +109,31 @@ end
 
 def num_points_scored(player_name)
   # get a list of all the players
+  players = get_players()
+
   # find the player whose name matches the argument 'player_name'
+  player = get_player(players, player_name)
+
   # return that player's points
+  player[:points]
+
+  # get_player(get_players, player_name)[:points]
+end
+
+def get_player(players, player_name)
+  players.find do |player|
+    player[:player_name] == player_name
+  end
+end
+
+def get_players
+  # all_players = []
+  # game_hash.values.each do |team_info|
+  #   return all_players << team_info[:players]
+  # end
+  # all_players
+  
+  game_hash.values.map do |team_info|
+    team_info[:players]
+  end.flatten
 end
