@@ -2,10 +2,16 @@ require 'bundler'
 Bundler.require
 
 DB = {
-  conn: SQLite3::Database.new('db/test.db')
+  conn: SQLite3::Database.new('db/twitter.db')
 }
 
 DB[:conn].results_as_hash = true
+
+# Namespacing ::
+# module SQLite3
+#   class Database
+#   end
+# end
 
 require_relative '../lib/tweet.rb'
 require_relative '../lib/tweets_app.rb'

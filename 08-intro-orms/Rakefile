@@ -9,3 +9,8 @@ desc 'Generates hipster gibberish.'
 task :hipster_words do
   puts Faker::Hipster.sentence
 end
+
+desc 'Say hello'
+task :hello do
+  puts "hi there"
+end

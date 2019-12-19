@@ -14,87 +14,82 @@
 
 **1. Create a *books* table and an *authors* table. Books should have a *title* and authors should have a *name*.**
 
-**books table**
-
-| id | title | author_id |
+*books table*
+| id | title         | author_id |
 | --- | --- | --- |
-| 1 | To Kill a Mockingbird | 2 |
-| 2 | Water for Elephants | 3 |
-| 3 | The Three-Body Problem | 1 |
+| 1  | enders game   | 1 |
+| 2  | harry potter  | 2 |
+| 3  | enders shadow | 1 |
 
-**authors table**
-
-| id | name |
+*authors table*
+id | name |
 | --- | --- |
-| 1 | Cixin Liu |
-| 2 | Harper Lee |
-| 3 | Sara Gruen |
+1  | orrison scott |
+2  | jk rowling    |
 
-**2. Write the SQL to find all books written by a certain author given the author's id (Sara Gruen's).**
+
+**2. Write the SQL to find all books written by a certain author given the author's id.**
 
 ```SQL
-SELECT * FROM books
-WHERE author_id == 3;
+SELECT * FROM books WHERE author_id = 1
 ```
 
 **3. Create a *books* table and an *authors* table where each author can have one or multiple books. Books should have a *title* and authors should have a *name*.**
 
-**books table**
-
-| id | title |
+*books table*
+| id | title         |
 | --- | --- | --- |
-| 1 | To Kill a Mockingbird |
-| 2 | Water for Elephants |
-| 3 | The Three-Body Problem |
-| 4 | Go Set A Watchman |
-| 5 | Death's End |
+| 1  | enders game   |
+| 2  | harry potter  |
+| 3  | enders shadow |
 
-**book_authors (join) table**
-
-| id | author_id | book_id |
+*book_authors*
+| id | book_id | author_id |
 | --- | --- | --- |
-| 1 | 2 | 1 |
-| 2 | 3 | 2 |
-| 3 | 1 | 3 |
-| 4 | 4 | 3 |
-| 5 | 2 | 4 |
+| 1 | 3 | 1 |
+| 2 | 2 | 2 |
+| 3 | 3 | 4 |
+| 4 | 2 | 1 |
 
-**authors table**
-
-| id | name |
+*authors table*
+id | name |
 | --- | --- |
-| 1 | Cixin Liu |
-| 2 | Harper Lee |
-| 3 | Sara Gruen |
-| 4 | Ken Liu |
+1  | orrison scott |
+2  | jk rowling    |
+
 
 ## CRUD 🎨
 
 *What are the four ways we can interact with data? What might this interaction look like in SQL? In Ruby?*
 
 ### Create
-
+#### SQL
 - `CREATE TABLE books (id INTEGER PRIMARY KEY, title TEXT);`
 - `INSERT INTO books (title) VALUES ("The Three-Body Problem");`
+#### Ruby
 - `Book.new`
 
 ### Read
-
+#### SQL
 - `SELECT * FROM books;`
-- `Book.all`
 - `SELECT * FROM books WHERE id = 5 LIMIT 1;`
+#### Ruby
+- `Book.all`
 - `Book.find(5)`
 - `Book.find_by(id: 5)`
 
 ### Update
-
+#### SQL
 - `UPDATE books SET title = 'Ana Karenina' WHERE id = 5`
+#### Ruby
 - `Book#update({'title' => 'Ana Karenina'})`
 
 ### Delete
-
+#### SQL
 - `DELETE FROM books WHERE id = 3;`
+#### Ruby
 - `Book#delete`
+
 
 ## The Active Record Pattern 🧩
 
