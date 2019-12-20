@@ -1,106 +1,94 @@
-# ORMs and Active Record
+# ActiveRecord Associations
 
-## Goals 🦾
+## Goals 🚀
 
-- [ ] Review ORM 🔭
-- [ ] Explore Rake and file directory structure 🍱
-- [ ] Migrate a database 🔋
-- [ ] Connect Models to ActiveRecord ⛓
-- [ ] Practice using ActiveRecord Methods 🔩
+- [ ] Review Rake and file directory structure 🍱
+- [ ] Review Active Record 🧩
+- [ ] Review ActiveRecord migrations 🚢
+- [ ] Review connecting models to ActiveRecord ⛓
+- [ ] Survey modules, namespacing, mixins 🛰
+- [ ] Practice using ActiveRecord methods ⚙️
+- [ ] Implement model relationships with ActiveRecord associations 🔩
+- [ ] Logistics
 
-## Review 🔭
+## Review 🍱
 
-- **What is a database?**
-- **What is a database management system (DBMS)?**
-- ⚠️ _**What is SQL?**_
-- ⚠️ _**What is Object Relational Mapping (ORM)?**_ 
-  - Accessing a relational database (db) using an object-oriented programming language
-  - ORMs help us "map" db tables to classes and instances of classes to rows in those tables.
-- ⚠️ _**What is the Active Record pattern?**_
-  - domain-database, model-table, column-attribute, row-instance
+- ⚠️ _**What is Rake, Bundle, and the file directory structure?**_
+- ⚠️ _**What is the Active Record ORM pattern?**_
 
----
+## ActiveRecord Migrations and Models 🚢
 
-## Rake & File/Folder Structure 🍱
+### Reviewing models and migrations ⛓
 
-### Rake
+- Migrations
+  - Created with `rake db:create_migration`
+  - Inherit from `ActiveRecord::Migration`
+  - Naming: Table name is **plural** (e.g. `:characters`)
+- Models
+  - Classes written in their own `.rb` file in `app/models`
+  - Inherit from `ActiveRecord::Base`
+  - Naming: `.rb` file and class is **singular** (e.g. `class Character`)
 
-- Rakefile defines tasks to be run from the command line
-- `rake -T`: View all tasks
-- Tasks allow us to encapsulate Ruby code that we want to execute **from the command line**
-- We get some tasks from `sinatra/activerecord/rake` library which gives us easy-to-use ActiveRecord (AR) tasks (see `Gemfile`)
+## Modules, namespacing, mixins 🛰
 
-### File/Folder Structure
+- Modules
+  - Examples: ActiveRecord's `ActiveRecord`, Faker's `Faker`
+  - Containers for methods
+  - Cannot be instantiated
+  - Allow program to share methods between classes
+  - Provide namespacing, mixin capabilities
+- Namespacing
+  - Examples: `ActiveRecord::Base` or `Faker::TvShows::Friends`
+  - Creating space for names
+  - Avoids naming "collisions" of methods and constant
+- Mixins
+  - Examples: `include ForeignAssociation`
+  - Problem: Classes can only inherit from one class (chain of ancestry)
+  - Solution: `include` or `extend` module for bonus methods
+    - `include`
+      - Includes module methods to class instance
+      - Insert module into ancestor chain of class just after superclass
+    - `extend`
+      - Extends module methods to class
+      - Doesn't alter ancestor chain
 
-- `Gemfile` describes the gem dependencies for our program
-- `app` folder holds our models (our Ruby classes)
-- `db` directory holds migrations and `seeds.rb` file
-- `config` holds environment file
-  - `require 'bundler/setup'` and `Bundler.require` load all of the gems in our `Gemfile`
-  - `ActiveRecord::Base.establish_connection` sets up our db (with options hash)
-  - `require_all` loads all of our application code
+## Practicing ActiveRecord associations 🔩
 
----
+- Associations: model relationships
+  - Created with ♥ and macros!
+    - `belongs_to`
+    - `has_one`
+    - `has_many`
+    - `has_many :through`
+    - others: read the docs
+- Does your model `belongs_to` anything?
+  - Yes? Need a foreign id in table
+  - No? What _is_ it's relationship?
 
-## Migrations and Database Structure 🔋
+### How to build models & migrations 💡
 
-- To set up db, use `rake db:create_migration NAME=create_characters`
-- Singular (model class) vs Plural (table) names
-- `create_table` method takes a block, the block takes a table builder
-- Run migrations with `rake db:migrate`
-- `schema.rb` is authoritative representation of DB structure
-- **Let's blow up the db (DO NOT DO IN REAL LIFE!!)!**
-- Another way: gracefully fixing the DB
-  1. Create a new migration
-  2. Roll that migration back (`rake db:rollback`
-  3. Delete the migration files you don't want to keep
+1. Develop your domain model
+2. Write and execute migration files
+3. Create model, inherit from ActiveRecord, add association macros
+4. Instantiate models in `seed.rb` and seed the database
+5. Double-check naming in migrations and models
+6. `rake console` and test, test, test!
 
----
+## Takeaways 🚀
 
-## Connecting Models to ActiveRecord ⛓
-
-- Our models (Ruby classes) appear in `app/models`
-
-  ```ruby
-  class Character < ActiveRecord::Base
-  end
-  ```
-
-- Since our Ruby classes inherit from ActiveRecord, we have access to AR methods!
-- Active Record auto-generates attribute accessors from column names
-
----
-
-## Important Methods from ActiveRecord 🔩
-
-- Model.new
-  - Creates a new **RUBY** instance in local memory without persisting to the db
-- Model.save
-  - Inserts or updates a **RUBY** instance to the db
-- Model.create
-  - Model.new + Model.save
-  - A class method that creates a new **RUBY** instance AND saves it to the db
-- Model.all
-  - Returns all instances (we wrote this by hand a million times)
-- Model.first
-  - Instance with the lowest ID in the db
-- Model.find
-  - Finds a record by id and returns a Ruby instance––`Character.find(1)` returns the character with an id of 1
-- Model.find_by(attribute: value)
-  - Can find by one attribute-value pair or multiple
-  - `Character.find_by(name: 'Ross')` will return the character with a name of 'Ross'
-
----
-
-## Takeaways 🥖
-
-**1. Object Relational Mappers (ORMs)** let us write OOP code in one language, while leveraging a relational database that can only be queried in another language. For example, ActiveRecord interfaces a Ruby program with a SQL database.
-**2. Active Record** is pattern of ORMs with the following mapping: domain-database, model-table, column-attribute, row-instance.
-**3.** As we build more complex applications, we will use new tools and patterns: **Bundle**, to manage gems and gem dependencies; **Rake**, to execute tasks for us from the command line; and a **specific file directory structure**, to separate concerns of Ruby code and adhere to a widely-used and understood convention.
-**4. ActiveRecord** is a Ruby ORM that can be imported as a gem and lets us use Ruby to create databases and implement relationships.
+1. Rake gives us tools to manipulate our database and test our code.
+2. ActiveRecord offers us methods to create models and their relationships
+3. Modules are containers for methods to keep code DRY and organized
+4. Association macros must be in agreement with database schema 
 
 ## Suggested Reading 📚
-- ["What is an ORM?" on StackOverflow](https://stackoverflow.com/questions/1279613/what-is-an-orm-how-does-it-work-and-how-should-i-use-one)
-- [Rake Documentation](https://github.com/ruby/rake)
-- [ActiveRecord Documentation](https://guides.rubyonrails.org/active_record_basics.html)
 
+- [ActiveRecord Basics](https://guides.rubyonrails.org/active_record_basics.html)
+- [ActiveRecord Migrations](https://guides.rubyonrails.org/active_record_migrations.html)
+- [ActiveRecord Associations](https://guides.rubyonrails.org/association_basics.html)
+
+## Logistics
+- Blogs due after break (Tuesday or Thursday - check your date)
+- Project Guidelines will be deployed
+- Group Project Teams
+- Deploying "Getting remote data" lessons (anyone interested in scraping?)

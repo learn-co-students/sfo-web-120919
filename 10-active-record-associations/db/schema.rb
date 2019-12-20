@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_19_223622) do
+ActiveRecord::Schema.define(version: 2019_12_20_190253) do
+
+  create_table "appearances", force: :cascade do |t|
+    t.integer "character_id"
+    t.integer "episode_id"
+  end
 
   create_table "characters", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "episodes", force: :cascade do |t|
     t.string "name"
   end
 
