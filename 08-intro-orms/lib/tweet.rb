@@ -17,7 +17,8 @@ class Tweet
     tweets = DB[:conn].execute('SELECT * FROM tweets')
 
     tweets.map do |tweet|
-      Tweet.new({"username" => tweet["username"], "message" => tweet["message"]})
+      Tweet.new(tweet)
+      # Tweet.new({"username" => tweet["username"], "message" => tweet["message"]})
     end
   end
 

@@ -17,7 +17,7 @@
   - Accessing a relational database (db) using an object-oriented programming language
   - ORMs help us "map" db tables to classes and instances of classes to rows in those tables.
 - ⚠️ _**What is the Active Record pattern?**_
-
+  - domain-database, model-table, column-attribute, row-instance
 
 ---
 
@@ -62,7 +62,7 @@
 - Our models (Ruby classes) appear in `app/models`
 
   ```ruby
-  class Trainer < ActiveRecord::Base
+  class Character < ActiveRecord::Base
   end
   ```
 
