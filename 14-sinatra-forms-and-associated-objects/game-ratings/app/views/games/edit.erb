@@ -1,14 +1,21 @@
-<h1>Create a new Game!</h1>
+<h1>Edit <%= @game.title %></h1>
 
-<form action="/games" method="post">
+<form action="/games/<%= @game.id %>" method="post">
+  <input type="hidden" name="_method" value="patch" />
+
   <div class="input-wrapper">
     <label for="title">Title:</label>
-    <input type="text" name="title" id="title" value="<%= @game.title %>" />
+    <input
+      type="text"
+      name="game[title]"
+      id="title"
+      value="<%= @game.title %>"
+    />
   </div>
 
   <div class="input-wrapper">
     <label for="description">Description:</label>
-    <textarea rows="4" cols="50" name="description" id="description">
+    <textarea rows="4" cols="50" name="game[description]" id="description">
 <%= @game.description %></textarea
     >
   </div>
@@ -17,7 +24,7 @@
     <label for="image_url">Image URL:</label>
     <input
       type="text"
-      name="image_url"
+      name="game[image_url]"
       id="image_url"
       value="<%= @game.image_url %>"
     />
@@ -27,7 +34,7 @@
     <label for="rating">Rating:</label>
     <input
       type="number"
-      name="rating"
+      name="game[rating]"
       id="rating"
       min="1"
       max="5"
