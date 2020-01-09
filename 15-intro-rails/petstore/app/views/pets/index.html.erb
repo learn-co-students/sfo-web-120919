@@ -1,0 +1,10 @@
+<h1>This is all of our pets</h1>
+
+<ul>
+  <% @pets.each do |pet| %>
+  <li>
+    Name: <%= pet.name %> Species: <%= pet.species %> Number of Legs: <%=
+    pet.num_legs %>
+  </li>
+  <% end %>
+</ul>
