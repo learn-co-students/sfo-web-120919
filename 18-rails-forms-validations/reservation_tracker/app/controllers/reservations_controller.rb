@@ -1,0 +1,36 @@
+class ReservationsController < ApplicationController
+  def index
+  end
+
+  def show
+  end
+
+  def new
+    @reservation = Reservation.new
+  end
+
+  def edit
+  end
+
+  def create
+    @reservation = Reservation.new(reservation_params)
+
+    if @reservation.save
+      redirect_to @reservation.customer
+    else
+      render :new
+    end
+  end
+
+  def update
+  end
+
+  def destroy
+  end
+
+  private
+  
+  def reservation_params
+    params.require(:reservation).permit(:party_size, :date, :customer_id, :restaurant_id)
+  end
+end

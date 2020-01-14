@@ -1,0 +1,9 @@
+<ul>
+<% @customers.each do |customer| %>
+
+	<li>
+		<%= link_to customer.name, customer %>
+	</li>
+
+<% end %>
+</ul>

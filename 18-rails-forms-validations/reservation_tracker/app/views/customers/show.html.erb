@@ -1,0 +1,15 @@
+<%= @customer.name %>
+
+<% @customer.reservations.each do |reservation| %>
+	<p>
+		Party Size: <%= reservation.party_size %>
+	</p>
+
+	<p>
+		Date: <%= reservation.date.to_datetime.strftime('%d-%m-%Y') %>
+	</p>
+
+	<p>
+		Restaurant Name: <%= reservation.restaurant.name %>
+	</p>
+<% end %>
