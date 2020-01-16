@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  air_type: 1
+  time: 2020-01-16 10:36:34
+  num_passengers: 1
+  destination: MyString
+
+two:
+  air_type: 1
+  time: 2020-01-16 10:36:34
+  num_passengers: 1
+  destination: MyString

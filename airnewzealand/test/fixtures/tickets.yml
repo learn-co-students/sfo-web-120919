@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2020-01-16 10:41:47
+  seat_num: 1
+  passenger_id: 1
+  flight: one
+
+two:
+  date: 2020-01-16 10:41:47
+  seat_num: 1
+  passenger_id: 1
+  flight: two
