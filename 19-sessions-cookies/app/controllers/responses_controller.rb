@@ -1,5 +1,5 @@
 class ResponsesController < ApplicationController
-    before_action :define_question, :define_response
+    before_action :define_question, :define_response, :number_correct, :message
 
     def new
     end
@@ -13,15 +13,24 @@ class ResponsesController < ApplicationController
     end
 
     def create
-        @number_correct = 0
+        # Memoization
+        session[:number_correct] ||= 0
         response = Response.create(response_params)
         if response.question.correct_answer == response.answer
-            @number_correct = @number_correct + 1
-            puts "Correct"
+            session[:number_correct] = session[:number_correct] + 1
+            flash[:message] = "Great job!"
         else
-            puts "Incorrect"
+            flash[:message] = "Boooo! Try again."
         end
         redirect_to '/random-question'
+    end
+
+    def number_correct
+        @number_correct = session[:number_correct]
+    end
+
+    def message
+        @message = flash[:message]
     end
 
     def response_params
