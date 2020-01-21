@@ -1,0 +1,11 @@
+<h1><%= @user.username %></h1>
+
+<p><%= "Name: #{@user.name}" %></p>
+
+<%= link_to "All users", users_path %>
+
+<% if @current_user.id == params[:id].to_i %>
+  <%= link_to "Delete account", delete_account_path, method: "DELETE" %>
+<% end %>
+
+
