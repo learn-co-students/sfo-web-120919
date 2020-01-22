@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Spirit Animals</h1>
+
+<div id="animal-grid">
+  <% @animals.each do |animal| %>
+    <div class="animal">
+      <img src="<%= animal.image_url %>">
+      <div class="description">
+        <%= animal.person_name %>'s spirit animal is the <%= animal.animal_name %>
+        <div class="button-group">
+          <%= link_to "Show", animal %>
+          <%= link_to "Edit", edit_animal_path(animal) %>
+          <%= link_to "Destroy", animal, method: :delete, data: { confirm: "Are you sure?" } %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<br>
+
+<%= link_to 'New Animal', new_animal_path %>

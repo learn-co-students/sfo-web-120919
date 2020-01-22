@@ -1,0 +1,181 @@
+// Place all the styles related to the Animals controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// Additional CSS Reset
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+// General
+html,
+body {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  color: #4c4c4c;
+}
+
+main {
+  padding-top: 30px;
+  margin: 0 auto;
+  margin: 0 50px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 1rem 0;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+}
+
+h3 {
+  font-size: 1.6rem;
+}
+
+h4 {
+  font-size: 1.4rem;
+}
+
+h5 {
+  font-size: 1.2rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+a {
+  color: #fd903e;
+}
+
+img {
+  width: 100%;
+}
+
+// Navigation
+nav {
+  align-items: center;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  background: #fd903e;
+
+  a {
+    text-decoration: none;
+    padding: 10px;
+    display: inline-block;
+    height: 100%;
+    border-radius: 3px;
+    color: white;
+
+    svg {
+      height: 18px;
+    }
+
+    &:hover {
+      background: #e46a0da1;
+    }
+  }
+}
+
+// Forms
+// Labels and inputs
+input {
+  border-radius: 3px;
+  border: 1px solid #c3c3c3;
+  padding: 5px 10px;
+  margin: 0.2rem 0 0.6rem 0;
+  width: 100%;
+}
+
+// Buttons
+button,
+input[type="submit"] {
+  border-radius: 3px;
+  padding: 5px 10px;
+  color: white;
+  background: #fd903e;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+
+  &:hover {
+    background: #e46a0da1;
+  }
+}
+
+// New animal page
+#new-animal {
+  max-width: 500px;
+  margin: auto;
+}
+
+// All animals page
+#animal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 40px;
+
+  .animal {
+    .description {
+      background: #00000091;
+      width: 100%;
+      padding: 1rem;
+      color: white;
+      text-align: center;
+
+      .button-group {
+        display: flex;
+        justify-content: space-evenly;
+        margin-top: 10px;
+
+        a {
+          background: #ffffffc9;
+          border-radius: 3px;
+          padding: 5px 10px;
+          text-decoration: none;
+          color: black;
+
+          &:hover {
+            background: #fd903e;
+            color: white;
+          }
+        }
+      }
+    }
+
+    img {
+      height: 230px;
+      object-fit: cover;
+    }
+  }
+}
+
+// Media queries
+@media (max-width: 1000px) {
+  #animal-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  #animal-grid {
+    grid-template-columns: 1fr;
+  }
+}
