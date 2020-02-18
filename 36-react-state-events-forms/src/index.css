@@ -1,0 +1,47 @@
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+#root {
+  text-align: center;
+  margin: 2rem 5rem;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+h2 {
+  margin: 0 0 1rem 0;
+}
+
+form {
+  border: 1px solid;
+  padding: 2rem;
+  margin-top: 3rem;
+}
+
+form label {
+  margin-right: 0.5rem;
+}
+
+form input {
+  padding: 0.4rem 0.5rem;
+  font-size: 0.8rem;
+  border-radius: 5px;
+  border: 1px solid;
+}
+
+form input[type="submit"] {
+  padding: 0.6rem 1.3rem;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  background: #009c97;
+  font-size: 0.8rem;
+}
+
+form >*:not(:last-child) {
+  margin-right: 1rem;
+}
