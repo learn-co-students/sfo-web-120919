@@ -3,27 +3,38 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import logo from "./logo.svg";
 import "./App.css";
+import { createStore } from "redux";
+
+const initialState = { count: 0 };
+
+const reducer = (oldState, action) => {
+  console.log("oldState", oldState, "action", action);
+
+  switch (action.type) {
+    case "UPDATE":
+      return { ...oldState, count: oldState.count + action.amount };
+    case "INCREMENT":
+      return { ...oldState, count: oldState.count + 1 };
+    // case "DECREMENT":
+    //   return { ...oldState, count: oldState.count - 1 };
+    default:
+      return oldState;
+  }
+};
+
+const store = createStore(reducer, initialState);
 
 class App extends Component {
-  state = { count: 0 };
-
-  increment = () => {
-    this.setState(prevState => ({ count: prevState.count + 1 }));
-  };
-
-  decrement = () => {
-    this.setState(prevState => ({ count: prevState.count - 1 }));
-  };
+  // state = { count: 0 };
+  componentDidMount() {
+    store.subscribe(() => this.forceUpdate());
+  }
 
   render() {
     return (
       <div className="App">
-        <Header count={this.state.count} />
-        <Counter
-          count={this.state.count}
-          increment={this.increment}
-          decrement={this.decrement}
-        />
+        <Header />
+        <Counter />
       </div>
     );
   }
@@ -31,9 +42,10 @@ class App extends Component {
 
 class Header extends Component {
   renderDescription = () => {
-    const remainder = this.props.count % 5;
+    const remainder = store.getState().count % 5;
     const upToNext = 5 - remainder;
-    return `The current count is less than ${this.props.count + upToNext}`;
+    return `The current count is less than ${store.getState().count +
+      upToNext}`;
   };
 
   render() {
@@ -48,12 +60,23 @@ class Header extends Component {
 }
 
 class Counter extends Component {
+  increment = () => {
+    // this.setState(prevState => ({ count: prevState.count + 1 }));
+    store.dispatch({ type: "UPDATE", amount: 5 });
+  };
+
+  decrement = () => {
+    // this.setState(prevState => ({ count: prevState.count - 1 }));
+    // store.dispatch({ type: "DECREMENT" });
+    store.dispatch({ type: "UPDATE", amount: -3 });
+  };
+
   render() {
     return (
       <div className="Counter">
-        <h1>{this.props.count}</h1>
-        <button onClick={this.props.decrement}> - </button>
-        <button onClick={this.props.increment}> + </button>
+        <h1>{store.getState().count}</h1>
+        <button onClick={this.decrement}> - </button>
+        <button onClick={this.increment}> + </button>
       </div>
     );
   }
